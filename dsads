@@ -343,4 +343,4 @@ window.CHEATS = top.CHEATS = {
         APP.ws._msg({ data: new Uint8Array(SERVER).buffer })
         APP.ws.send(new Uint8Array(CLIENT))
     }
-};d
+};
