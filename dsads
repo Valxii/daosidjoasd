@@ -4,8 +4,8 @@ window.QUERY = top.QUERY = SELECTOR => top.document.querySelector(SELECTOR);
 window.QUERYALL = top.QUERYALL = ALL => top.document.querySelectorAll(ALL);
 window.CLASSNAME = top.CLASSNAME = CLASS => top.document.getElementsByClassName(CLASS);
 
-window.DECODE = top.DECODE = TXT => new TextDecoder().decode(TXT);
-window.ENCODE = top.ENCODE = TXT => new TextEncoder().encode(TXT);
+window.decode = top.decode = TXT => new TextDecoder().decode(TXT);
+window.encode = top.encode = TXT => new TextEncoder().encode(TXT);
 window.BYTE16 = top.BYTE16 = NUM => new Uint8Array(new Uint16Array([NUM]).buffer).reverse();
 window.BYTE32 = top.BYTE32 = NUM => new Uint8Array(NUM ? new Uint32Array([NUM]).buffer : []).reverse();
 window.SIGN16 = top.SIGN16 = NUM => new Int16Array(new Uint8Array(NUM).reverse().buffer)[0];
