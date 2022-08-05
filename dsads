@@ -204,7 +204,7 @@ window.CHEATS = top.CHEATS = {
         APP.ws.send(new Uint8Array(CLIENT))
     },
     SET_EFFECT: (EFFECT) => {
-        var ENCODE = ENCODE(EFFECT);
+        var ENCODE = encode(EFFECT);
 
         const SERVER = [243, 4, 29, 0, 3, 22, 105, ...BYTE32(APP.ME), 70, 68, 0, 0, 0, 1, 115, 0, 9, 109, 111, 100, 105, 102, 105, 101, 114, 115, 68, 0, 0, 0, 1, 115, 0, ENCODE.length, ...ENCODE, 98, 0, 254, 105, 0, 0, 0, 0]
         const CLIENT = [243, 2, 25, 0, 2, 22, 105, ...BYTE32(APP.PLAYERS), 70, 68, 0, 0, 0, 1, 115, 0, 9, 109, 111, 100, 105, 102, 105, 101, 114, 115, 68, 0, 0, 0, 1, 115, 0, ENCODE.length, ...ENCODE, 98, 0]
@@ -213,7 +213,7 @@ window.CHEATS = top.CHEATS = {
         APP.ws.send(new Uint8Array(CLIENT))
     },
     SET_ANIMATION: (EFFECT) => {
-        var ENCODE = ENCODE(EFFECT);
+        var ENCODE = encode(EFFECT);
         var LENGHT = 4;
 
         if (EFFECT == ANIMATIONS.TPose) {
@@ -312,7 +312,7 @@ window.CHEATS = top.CHEATS = {
     },
     CHAT: {
         MESSAGE: (CHAT, MESSAGE) => {
-            var ENCODE = ENCODE(MESSAGE)
+            var ENCODE = encode(MESSAGE)
 
             const SERVER = [243, 4, 34, 0, 3, 87, 105, 0, 0, 0, CHAT, 88, 68, 0, 0, 0, 2, 98, 0, 105, 0, 0, 0, /**/ 1 /**/, 98, 5, 115, 0, ENCODE.length, ...ENCODE, 254, 105, 0, 0, 0, 0]
             const CLIENT = [243, 2, 28, 0, 2, 87, 105, 0, 0, 0, CHAT, 88, 68, 0, 0, 0, 2, 98, 0, 105, 0, 0, 0, /**/ 1 /**/, 98, 5, 115, 0, ENCODE.length, ...ENCODE]
