@@ -139,6 +139,7 @@ window.ACTIONS = top.ACTIONS = {
     Big: 17,
     Heal: 27,
     Kick: 0,
+    Stuck: 0
 };
 window.TEAMS = top.TEAMS = {
     Default: 0,
@@ -243,20 +244,12 @@ window.CHEATS = top.CHEATS = {
         APP.ws.send(new Uint8Array(CLIENT))
 
     },
-    SET_LEVEL: (NUM) => {
-        var ID = 1;
+    SET_LEVEL: (NUM, AUTHOR) => {
+        const SERVER = [243, 4, 55, 0, 2, 169, 105, ...BYTE32(NUM), 254, 105, 0, 0, 0, AUTHOR]
+        const CLIENT = [243, 2, 56, 0, 1, 169, 105, ...BYTE32(NUM)]
 
-        for (var i = 0; i < ID; ID++) {
-            const SERVER = [243, 4, 55, 0, 2, 169, 105, ...BYTE32(NUM), 254, 105, 0, 0, 0, ID]
-            const CLIENT = [243, 2, 56, 0, 1, 169, 105, ...BYTE32(NUM)]
-
-            APP.ws._msg({ data: new Uint8Array(SERVER).buffer });
-            APP.ws.send(new Uint8Array(CLIENT))
-
-            if (ID > 500) {
-                break
-            }
-        }
+        APP.ws._msg({ data: new Uint8Array(SERVER).buffer });
+        APP.ws.send(new Uint8Array(CLIENT))
     },
     SET_SCALE: (NUM) => {
         const SERVER = [243, 4, 29, 0, 3, 22, 105, ...BYTE32(APP.ME), 70, 68, 0, 0, 0, 1, 115, 0, 4, 115, 105, 122, 101, 102, ...FLOAT(NUM), 254, 105, 0, 0, 0, 0]
@@ -311,11 +304,11 @@ window.CHEATS = top.CHEATS = {
         }
     },
     CHAT: {
-        MESSAGE: (CHAT, MESSAGE) => {
+        MESSAGE: (CHAT, MESSAGE, AUTHOR) => {
             var ENCODE = encode(MESSAGE)
 
-            const SERVER = [243, 4, 34, 0, 3, 87, 105, 0, 0, 0, CHAT, 88, 68, 0, 0, 0, 2, 98, 0, 105, 0, 0, 0, /**/ 1 /**/, 98, 5, 115, 0, ENCODE.length, ...ENCODE, 254, 105, 0, 0, 0, 0]
-            const CLIENT = [243, 2, 28, 0, 2, 87, 105, 0, 0, 0, CHAT, 88, 68, 0, 0, 0, 2, 98, 0, 105, 0, 0, 0, /**/ 1 /**/, 98, 5, 115, 0, ENCODE.length, ...ENCODE]
+            const SERVER = [243, 4, 34, 0, 3, 87, 105, 0, 0, 0, CHAT, 88, 68, 0, 0, 0, 2, 98, 0, 105, 0, 0, 0, AUTHOR, 98, 5, 115, 0, ENCODE.length, ...ENCODE, 254, 105, 0, 0, 0, 0]
+            const CLIENT = [243, 2, 28, 0, 2, 87, 105, 0, 0, 0, CHAT, 88, 68, 0, 0, 0, 2, 98, 0, 105, 0, 0, 0, AUTHOR, 98, 5, 115, 0, ENCODE.length, ...ENCODE]
 
             APP.ws._msg({ data: new Uint8Array(SERVER).buffer });
             APP.ws.send(new Uint8Array(CLIENT))
