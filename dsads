@@ -184,10 +184,9 @@ window.ANIMATIONS = top.ANIMATIONS = {
 window.CHAT = top.CHAT = {
     Default: 7,
     Admin: 3,
-    All: 7,
-    Team: 8,
     Says: 9,
-    Error: 11
+    Error: 11,
+    Team: 8
 };
 window.CHEATS = top.CHEATS = {
     SET_CUBE: (CUBE) => {
@@ -219,13 +218,21 @@ window.CHEATS = top.CHEATS = {
 
         if (EFFECT == ANIMATIONS.TPose) {
             LENGHT = 5
-        } else {
+       } else { 
             LENGHT = 4
+            
+       } else if(EFFECT == ANIMATIONS.Default) {
+             APP.ws._msg({ data: new Uint8Array([243, 4, 29, 0, 3, 22, 105, ...BYTE32(APP.ME), 70, 68, 0, 0, 0, 1, 115, 0, 0, 105, 0, 0, 0, 2, 254, 105, 0, 0, 0, 0]).buffer});
+             APP.ws.send(new Uint8Array([243, 2, 25, 0, 2, 22, 105, ...BYTE32(APP.ME), 70, 68, 0, 0, 0, 1, 115, 0, 0, 105, 0, 0, 0, 2]))
         }
 
         const SERVER = [243, 4, 29, 0, 3, 22, 105, ...BYTE32(APP.ME), 70, 68, 0, 0, 0, 1, 115, 0, 9, 97, 110, 105, 109, 97, 116, 105, 111, 110, 68, 0, 0, 0, 2, 115, 0, 5, 115, 116, 97, 116, 101, 115, 0, LENGHT, ...ENCODE, 115, 0, 9, 116, 105, 109, 101, 83, 116, 97, 109, 112, 105, 0, 0, 0, 1, 254, 105, 0, 0, 0, 0]
         const CLIENT = [243, 2, 25, 0, 2, 22, 105, ...BYTE32(APP.ME), 70, 68, 0, 0, 0, 1, 115, 0, 9, 97, 110, 105, 109, 97, 116, 105, 111, 110, 68, 0, 0, 0, 2, 115, 0, 5, 115, 116, 97, 116, 101, 115, 0, LENGHT, ...ENCODE, 115, 0, 9, 116, 105, 109, 101, 83, 116, 97, 109, 112, 105, 0, 0, 0, 1]
-
+        
+        // LOOP
+        APP.ws._msg({ data: new Uint8Array([243, 4, 29, 0, 3, 22, 105, ...BYTE32(APP.ME), 70, 68, 0, 0, 0, 1, 115, 0, 17, 115, 112, 97, 119, 110, 82, 111, 108, 101, 77, 111, 100, 101, 84, 121, 112, 101, 105, 0, 0, 0, 2, 254, 105, 0, 0, 0, 0]).buffer });
+        APP.ws.send(new Uint8Array([243, 2, 25, 0, 2, 22, 105, ...BYTE32(APP.ME), 70, 68, 0, 0, 0, 1, 115, 0, 17, 115, 112, 97, 119, 110, 82, 111, 108, 101, 77, 111, 100, 101, 84, 121, 112, 101, 105, 0, 0, 0, 2]))
+        
         APP.ws._msg({ data: new Uint8Array(SERVER).buffer });
         APP.ws.send(new Uint8Array(CLIENT))
     },
