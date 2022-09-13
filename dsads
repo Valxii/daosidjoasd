@@ -1,4 +1,3 @@
-
 window.CREATE = top.CREATE = ELEMENT => top.document.createElement(ELEMENT);
 window.ID = top.ID = ID => top.document.getElementById(ID);
 window.QUERY = top.QUERY = SELECTOR => top.document.querySelector(SELECTOR);
